@@ -73,7 +73,23 @@ export default function Home() {
   }
 
   // Sitemap navigation data matching the images
-  const sitemap = {
+  interface SitemapItem {
+    name: string;
+    desc: string;
+    icon?: React.ReactNode;
+  }
+
+  interface SitemapGroup {
+    label: string;
+    isTwoCol?: boolean;
+    items?: SitemapItem[];
+    col1Title?: string;
+    col1Items?: SitemapItem[];
+    col2Title?: string;
+    col2Items?: Array<string | SitemapItem>;
+  }
+
+  const sitemap: Record<string, SitemapGroup> = {
     platform: {
       label: "Platform",
       items: [
