@@ -162,20 +162,15 @@ export default function Home() {
           
           {/* Logo & Company Name */}
           <div className="flex flex-col">
-            <div className="flex items-center gap-1.5 select-none">
-              <span className="font-outfit font-black text-4xl text-primary leading-none">
-                D
-              </span>
-              <div className="flex flex-col items-start leading-none justify-center -mt-0.5">
-                <span className="font-outfit text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
-                  hira
-                </span>
-                <span className="font-outfit text-sm font-black text-foreground uppercase tracking-wider leading-none mt-1">
-                  ata
-                </span>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">
+                Δ
               </div>
+              <span className="font-outfit font-black tracking-widest text-xl text-foreground">
+                DHIRA
+              </span>
             </div>
-            <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-1">
+            <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-0.5">
               Digital Human Interfaces & Robotic Agents
             </span>
           </div>
@@ -383,7 +378,19 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="font-outfit font-black tracking-tight text-5xl md:text-7xl lg:text-8xl text-foreground leading-[0.95] max-w-4xl"
           >
-            From <span className="text-shimmer">Data.</span> <br />
+            From{" "}
+            <span className="inline-flex items-center gap-1.5 select-none align-middle text-shimmer">
+              <span>D</span>
+              <span className="flex flex-col items-start justify-center leading-none mt-1.5 md:mt-2.5">
+                <span className="text-[10px] md:text-[14px] lg:text-[18px] font-bold uppercase tracking-widest leading-none">
+                  hira
+                </span>
+                <span className="text-[16px] md:text-[24px] lg:text-[32px] font-black uppercase tracking-wider leading-none mt-1 md:mt-1.5">
+                  ata
+                </span>
+              </span>
+            </span>
+            . <br />
             To Decisions. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">At Scale.</span>
           </motion.h1>
@@ -1164,18 +1171,13 @@ export default function Home() {
           
           {/* Logo column */}
           <div className="flex flex-col items-start">
-            <div className="flex items-center gap-1.5 select-none">
-              <span className="font-outfit font-black text-4xl text-primary leading-none">
-                D
-              </span>
-              <div className="flex flex-col items-start leading-none justify-center -mt-0.5">
-                <span className="font-outfit text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
-                  hira
-                </span>
-                <span className="font-outfit text-sm font-black text-foreground uppercase tracking-wider leading-none mt-1">
-                  ata
-                </span>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">
+                Δ
               </div>
+              <span className="font-outfit font-black tracking-widest text-xl text-foreground">
+                DHIRA
+              </span>
             </div>
             <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-2">
               Digital Human Interfaces & Robotic Agents
