@@ -380,7 +380,7 @@ export default function Home() {
           >
             From Data. <br />
             To Decisions. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">At Scale.</span>
+            <span className="text-shimmer">At Scale.</span>
           </motion.h1>
 
           {/* Sub-headline */}
@@ -390,7 +390,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="mt-8 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed font-medium"
           >
-            DHIRA partners with governments and enterprises to design, build, and deploy intelligent systems — from strategy to production. Powered by Akashic, our unified AI and data platform.
+            DHIRA partners with governments and enterprises to design, build, and deploy intelligent systems — from strategy to production. Powered by <span className="text-shimmer font-black">Akashic</span>, our unified AI and data platform.
           </motion.p>
 
           {/* Action buttons */}
