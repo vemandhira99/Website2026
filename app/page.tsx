@@ -162,15 +162,20 @@ export default function Home() {
           
           {/* Logo & Company Name */}
           <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">
-                Δ
-              </div>
-              <span className="font-outfit font-black tracking-widest text-xl text-foreground">
-                DHIRA
+            <div className="flex items-center gap-1.5 select-none">
+              <span className="font-outfit font-black text-4xl text-primary leading-none">
+                D
               </span>
+              <div className="flex flex-col items-start leading-none justify-center -mt-0.5">
+                <span className="font-outfit text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
+                  hira
+                </span>
+                <span className="font-outfit text-sm font-black text-foreground uppercase tracking-wider leading-none mt-1">
+                  ata
+                </span>
+              </div>
             </div>
-            <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-0.5">
+            <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-1">
               Digital Human Interfaces & Robotic Agents
             </span>
           </div>
@@ -380,7 +385,7 @@ export default function Home() {
           >
             From Data. <br />
             To Decisions. <br />
-            <span className="text-shimmer">At Scale.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">At Scale.</span>
           </motion.h1>
 
           {/* Sub-headline */}
@@ -390,7 +395,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="mt-8 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed font-medium"
           >
-            DHIRA partners with governments and enterprises to design, build, and deploy intelligent systems — from strategy to production. Powered by <span className="text-shimmer font-black">Akashic</span>, our unified AI and data platform.
+            DHIRA partners with governments and enterprises to design, build, and deploy intelligent systems — from strategy to production. Powered by <span className="text-primary font-black">Akashic</span>, our unified AI and data platform.
           </motion.p>
 
           {/* Action buttons */}
@@ -1159,13 +1164,18 @@ export default function Home() {
           
           {/* Logo column */}
           <div className="flex flex-col items-start">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">
-                Δ
-              </div>
-              <span className="font-outfit font-black tracking-widest text-xl text-foreground">
-                DHIRA
+            <div className="flex items-center gap-1.5 select-none">
+              <span className="font-outfit font-black text-4xl text-primary leading-none">
+                D
               </span>
+              <div className="flex flex-col items-start leading-none justify-center -mt-0.5">
+                <span className="font-outfit text-[9px] font-bold text-muted-foreground uppercase tracking-widest leading-none">
+                  hira
+                </span>
+                <span className="font-outfit text-sm font-black text-foreground uppercase tracking-wider leading-none mt-1">
+                  ata
+                </span>
+              </div>
             </div>
             <span className="text-[7px] tracking-[0.22em] text-muted-foreground uppercase mt-2">
               Digital Human Interfaces & Robotic Agents
