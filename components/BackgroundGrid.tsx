@@ -82,6 +82,12 @@ export default function BackgroundGrid() {
             line: "rgba(109, 40, 217, 0.06)",
             grid: "rgba(109, 40, 217, 0.02)",
           }
+        case "light-orange":
+          return {
+            particle: "rgba(234, 88, 12, 0.24)", // Orange
+            line: "rgba(234, 88, 12, 0.08)",
+            grid: "rgba(234, 88, 12, 0.03)",
+          }
         case "dark":
         default:
           return {

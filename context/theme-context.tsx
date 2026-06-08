@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react"
 
-export type ThemeType = "dark" | "light-emerald" | "light-violet"
+export type ThemeType = "dark" | "light-emerald" | "light-violet" | "light-orange"
 
 interface ThemeContextType {
   theme: ThemeType
@@ -21,7 +21,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const root = window.document.documentElement
     // Remove all theme classes
-    root.classList.remove("theme-dark", "theme-light-emerald", "theme-light-violet")
+    root.classList.remove("theme-dark", "theme-light-emerald", "theme-light-violet", "theme-light-orange")
     
     // Add active theme class
     if (theme === "dark") {
@@ -32,6 +32,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.style.colorScheme = "light"
     } else if (theme === "light-violet") {
       root.classList.add("theme-light-violet")
+      root.style.colorScheme = "light"
+    } else if (theme === "light-orange") {
+      root.classList.add("theme-light-orange")
       root.style.colorScheme = "light"
     }
   }, [theme])

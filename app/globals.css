@@ -59,6 +59,25 @@
   --success: #10b981;
 }
 
+.theme-light-orange {
+  --background: #ffffff;
+  --foreground: #111827;
+  --primary: #ea580c; /* Vibrant Orange */
+  --primary-hover: #c2410c;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-hover: #e5e7eb;
+  --secondary-foreground: #111827;
+  --accent: #4b5563; /* Slate */
+  --accent-foreground: #ffffff;
+  --border: #e5e7eb;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(209, 213, 219, 0.6);
+  --muted: #6b7280;
+  --muted-foreground: #4b5563;
+  --success: #10b981;
+}
+
 body {
   color: var(--foreground);
   background-color: var(--background);

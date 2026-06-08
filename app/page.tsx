@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useTheme, ThemeType } from "../context/theme-context"
 import BackgroundGrid from "../components/BackgroundGrid"
 import { 
@@ -27,12 +27,7 @@ import {
   FileText,
   Activity,
   Cpu,
-  Search,
-  Lock,
-  ArrowUpRight,
-  TrendingDown,
-  Terminal,
-  Play
+  ArrowUpRight
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -41,37 +36,10 @@ export default function Home() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [chatbotOpen, setChatbotOpen] = useState(false)
-  const [activeDiagnostic, setActiveDiagnostic] = useState<number>(0)
   
-  // Real-time console logs simulation
-  const [logs, setLogs] = useState<string[]>([
-    "[SYSTEM] Cross-Domain Correlation Engine: ACTIVE.",
-    "[SECURITY] Zero Trust Architecture: Verified.",
-    "[INGESTION] 14/14 Sources Active. Latency: 12ms.",
-    "[COMPLIANCE] PII Masked for 4,200 Customer Records (GDPR).",
-    "[SYNC] Oracle Financials -> Salesforce Ledger: COMPLETED.",
-    "[AUTO-HEAL] Anomaly detected in APAC Supply Chain data -> Normalized (0.04s)."
-  ])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const logsPool = [
-        "[AUTO-HEAL] Anomaly detected in EMEA Logistics pipeline -> Resolved (0.06s).",
-        "[SECURITY] Threat matrix scan: 0 alerts.",
-        "[SYNC] SAP Ledger -> Salesforce Revenue Cloud: IN SYNC.",
-        "[COMPLIANCE] Data sovereignty check: PASSED (Sovereign Blueprint Localized).",
-        "[INGESTION] Ingestion rate: 142k events/sec. latency: 9ms.",
-        "[SYSTEM] AI Dynamic Pricing adjusted margins for 210 products."
-      ]
-      const randomLog = logsPool[Math.floor(Math.random() * logsPool.length)]
-      setLogs(prev => [randomLog, ...prev.slice(0, 5)])
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
   // Chatbot Q&A simulation
   const [chatMessages, setChatMessages] = useState<Array<{ sender: "user" | "bot"; text: string; citations?: string[] }>>([
-    { sender: "bot", text: "Hello! I am the Akashic Q&A Assistant. Ask me anything about our platform, DPI track record, or velocity protocol." }
+    { sender: "bot", text: "Hello! I am the Akashic Q&A Assistant. Ask me anything about our platform, DPI track record, or solutions." }
   ])
   const [chatInput, setChatInput] = useState("")
 
@@ -96,17 +64,80 @@ export default function Home() {
         botText = "Building an enterprise Document Q&A requires layout-aware parsing, hybrid retrieval (vector + keyword), and a re-ranker. To satisfy enterprise compliance audits, we recommend Apache 2.0 or MIT licensed models such as Qwen 2.5-VL or DeepSeek-V3 to avoid commercial use restrictions found in Llama or Gemma."
         citations = ["Document Q&A.docx - Page 8", "Licensing Matrix - Section 3"]
       } else if (query.includes("fast") || query.includes("gtm") || query.includes("timeline") || query.includes("cbse") || query.includes("pilot") || query.includes("velocity")) {
-        botText = "Our core USP is fast GTM. We deliver a complete proof of concept in 1.5 months (e.g. CBSE project), and full deployment is typically operational within 90 days. We also offer a structured 6-week Velocity Protocol to validate ROI before you scale."
-        citations = ["Velocity Protocol Overview", "Mukul Presales Interview - Section 7"]
+        botText = "Our core USP is fast GTM. We deliver a complete proof of concept in 1.5 months (e.g. CBSE project), and full deployment is typically operational within 90 days."
+        citations = ["DHIRA Content Master - Section 7"]
       }
 
       setChatMessages(prev => [...prev, { sender: "bot", text: botText, citations }])
     }, 800)
   }
 
+  // Sitemap navigation data matching the images
+  const sitemap = {
+    platform: {
+      label: "Platform",
+      items: [
+        { name: "Akashic Data Warehouse", desc: "Enterprise scale storage for analytics." },
+        { name: "Akashic Data Pipeline", desc: "Automated, secure data ingestion flow." },
+        { name: "Akashic Business Intelligence", desc: "Interactive role-based visual dashboards." },
+        { name: "Akashic Insights", desc: "Automated AI summaries and data reports." },
+        { name: "AML — Akashic Machine Learning", desc: "Predictive intelligence models." },
+        { name: "Akashic Master Data", desc: "Single source of truth for records." },
+        { name: "Akashic Data Governance", desc: "Strict data control and stewardship." },
+        { name: "Akashic Workflow", desc: "Orchestration and low-code rules." }
+      ]
+    },
+    solutions: {
+      label: "Offerings",
+      // Two-column dropdown layout
+      isTwoCol: true,
+      col1Title: "Strategic Capabilities",
+      col1Items: [
+        { name: "Akashic EIS", desc: "Executive Intelligence System", icon: <Layers className="w-4 h-4" /> },
+        { name: "Akashic Life", desc: "Predictive maternal health protocols.", icon: <Activity className="w-4 h-4" /> },
+        { name: "Akashic Knowledge", desc: "Intelligence at civilization scale.", icon: <Network className="w-4 h-4" /> }
+      ],
+      col2Title: "Sectors",
+      col2Items: ["Public Sector", "Healthcare", "Education", "Enterprise"]
+    },
+    delivery: {
+      label: "Delivery",
+      // Two-column dropdown layout
+      isTwoCol: true,
+      col1Title: "Strategize",
+      col1Items: [
+        { name: "AI Readiness Audit", desc: "Validate data for GenAI models.", icon: <BookOpen className="w-4 h-4" /> },
+        { name: "Sovereign Blueprint", desc: "Architect secure data mesh.", icon: <Layers className="w-4 h-4" /> },
+        { name: "Governance Framework", desc: "Define rules & accountability.", icon: <Shield className="w-4 h-4" /> }
+      ],
+      col2Title: "Engineer",
+      col2Items: [
+        { name: "Platform Deployment", desc: "Install the Akashic Core.", icon: <Cpu className="w-4 h-4" /> },
+        { name: "Legacy Modernization", desc: "Migrate monoliths safely.", icon: <Layers className="w-4 h-4" /> },
+        { name: "Custom Accelerators", desc: "Build tailored AI outcomes.", icon: <Zap className="w-4 h-4" /> }
+      ]
+    },
+    insights: {
+      label: "Insights",
+      items: [
+        { name: "Customer Stories", desc: "Real transformations with concrete numbers." },
+        { name: "Perspectives", desc: "Enterprise-grade RAG and data architecture guides." },
+        { name: "Documentation", desc: "Platform guides, APIs, and release logs." },
+        { name: "Guides", desc: "Step-by-step implementation resources." }
+      ]
+    },
+    company: {
+      label: "Company",
+      items: [
+        { name: "About Us", desc: "Our story, values, and Dilip Hanumara's vision." },
+        { name: "Careers", desc: "Build the future of digital public infrastructure." }
+      ]
+    }
+  }
+
   return (
-    <div className="relative min-h-screen font-sans overflow-x-hidden transition-colors duration-500 pb-20">
-      {/* Dynamic Animated Canvas Grid in Background */}
+    <div className="relative min-h-screen font-sans overflow-x-hidden transition-colors duration-500">
+      {/* Background Canvas Particle Grid */}
       <BackgroundGrid />
 
       {/* FIXED NAVIGATION HEADER */}
@@ -128,229 +159,110 @@ export default function Home() {
             </span>
           </div>
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-8">
-            {/* 1. Platform */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("platform")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
-                Platform
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-              <AnimatePresence>
-                {activeDropdown === "platform" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 top-full pt-2 w-80"
-                  >
-                    <div className="rounded-xl p-4 shadow-2xl border border-border/40 glass-effect flex flex-col gap-2">
-                      <span className="text-[9px] font-bold text-primary tracking-widest uppercase mb-1">Akashic Core Modules</span>
-                      {[
-                        "Akashic Data Warehouse",
-                        "Akashic Data Pipeline",
-                        "Akashic Business Intelligence",
-                        "Akashic Insights",
-                        "AML — Akashic Machine Learning",
-                        "Akashic Master Data",
-                        "Akashic Data Governance",
-                        "Akashic Workflow"
-                      ].map((item, idx) => (
-                        <a key={idx} href="#introducing-akashic" className="text-xs font-semibold py-1 hover:text-primary transition-colors text-foreground/80">
-                          {item}
-                        </a>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {Object.entries(sitemap).map(([key, group]) => (
+              <div 
+                key={key} 
+                className="relative"
+                onMouseEnter={() => setActiveDropdown(key)}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
+                  {group.label}
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === key ? "rotate-180" : ""}`} />
+                </button>
 
-            {/* 2. Offerings Dropdown (Matching Screenshot 1) */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("offerings")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
-                Offerings
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-              <AnimatePresence>
-                {activeDropdown === "offerings" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-1/2 -translate-x-1/4 top-full pt-2 w-[460px]"
-                  >
-                    <div className="rounded-2xl p-5 shadow-2xl border border-border/40 glass-effect grid grid-cols-12 gap-6">
-                      {/* Left: Strategic Capabilities */}
-                      <div className="col-span-7 flex flex-col gap-3.5">
-                        <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5">
-                          Strategic Capabilities
-                        </span>
-                        <div className="flex flex-col gap-3">
-                          {[
-                            { name: "Akashic EIS", desc: "Executive Intelligence System", icon: <Layers className="w-4 h-4" /> },
-                            { name: "Akashic Life", desc: "Predictive maternal health protocols.", icon: <Activity className="w-4 h-4" /> },
-                            { name: "Akashic Knowledge", desc: "Intelligence at civilization scale.", icon: <Network className="w-4 h-4" /> }
-                          ].map((item, idx) => (
-                            <div key={idx} className="flex gap-2.5 items-start group">
-                              <div className="w-7 h-7 rounded bg-primary/10 flex items-center justify-center text-primary mt-0.5">
-                                {item.icon}
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</span>
-                                <span className="text-[10px] text-muted-foreground">{item.desc}</span>
+                {/* Dropdown panel */}
+                <AnimatePresence>
+                  {activeDropdown === key && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.15 }}
+                      className={`absolute top-full pt-2 ${group.isTwoCol ? "left-1/2 -translate-x-1/2 w-[460px]" : "left-0 w-80"}`}
+                    >
+                      <div className="rounded-2xl p-5 shadow-2xl border border-border/40 glass-effect">
+                        {group.isTwoCol ? (
+                          <div className="grid grid-cols-12 gap-6">
+                            {/* Column 1 */}
+                            <div className="col-span-7 flex flex-col gap-3.5">
+                              <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5">
+                                {group.col1Title}
+                              </span>
+                              <div className="flex flex-col gap-3">
+                                {group.col1Items?.map((item, idx) => (
+                                  <div key={idx} className="flex gap-2.5 items-start group">
+                                    <div className="w-7 h-7 rounded bg-primary/10 flex items-center justify-center text-primary mt-0.5 shrink-0">
+                                      {item.icon}
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</span>
+                                      <span className="text-[10px] text-muted-foreground">{item.desc}</span>
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
                             </div>
-                          ))}
-                        </div>
+                            {/* Column 2 */}
+                            <div className="col-span-5 flex flex-col gap-3.5">
+                              <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5">
+                                {group.col2Title}
+                              </span>
+                              <div className="flex flex-col gap-2.5">
+                                {group.col2Items?.map((item, idx) => {
+                                  if (typeof item === "string") {
+                                    return (
+                                      <a key={idx} href="#who-we-serve" className="text-xs font-semibold hover:text-primary transition-colors text-foreground/80">
+                                        {item}
+                                      </a>
+                                    )
+                                  } else {
+                                    return (
+                                      <div key={idx} className="flex gap-2.5 items-start group">
+                                        <div className="w-7 h-7 rounded bg-primary/10 flex items-center justify-center text-primary mt-0.5 shrink-0">
+                                          {item.icon}
+                                        </div>
+                                        <div className="flex flex-col">
+                                          <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</span>
+                                          <span className="text-[10px] text-muted-foreground">{item.desc}</span>
+                                        </div>
+                                      </div>
+                                    )
+                                  }
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col gap-3">
+                            <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5 mb-1 block">
+                              {group.label} Options
+                            </span>
+                            {group.items?.map((item, idx) => (
+                              <a 
+                                key={idx} 
+                                href="#talk-to-us" 
+                                className="group flex flex-col p-1 rounded hover:bg-secondary/50 transition-all"
+                              >
+                                <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors flex items-center gap-1">
+                                  {item.name}
+                                  <ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                </span>
+                                <span className="text-[10px] text-muted-foreground mt-0.5 line-clamp-1">
+                                  {item.desc}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                      {/* Right: Sectors */}
-                      <div className="col-span-5 flex flex-col gap-3.5">
-                        <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5">
-                          Sectors
-                        </span>
-                        <div className="flex flex-col gap-2.5">
-                          {["Public Sector", "Healthcare", "Education", "Enterprise"].map((item, idx) => (
-                            <a key={idx} href="#serve-section" className="text-xs font-medium hover:text-primary transition-colors text-foreground/80">
-                              {item}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* 3. Delivery Dropdown (Matching Screenshot 2) */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("delivery")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
-                Delivery
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-              <AnimatePresence>
-                {activeDropdown === "delivery" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-[460px]"
-                  >
-                    <div className="rounded-2xl p-5 shadow-2xl border border-border/40 glass-effect grid grid-cols-2 gap-6">
-                      {/* Left: Strategize */}
-                      <div className="flex flex-col gap-3.5">
-                        <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5 flex items-center gap-1">
-                          <BookOpen className="w-3 h-3" /> Strategize
-                        </span>
-                        <div className="flex flex-col gap-3">
-                          {[
-                            { name: "AI Readiness Audit", desc: "Validate data for GenAI models." },
-                            { name: "Sovereign Blueprint", desc: "Architect secure data mesh." },
-                            { name: "Governance Framework", desc: "Define rules & accountability." }
-                          ].map((item, idx) => (
-                            <a key={idx} href="#implementation-layer" className="flex flex-col group">
-                              <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</span>
-                              <span className="text-[10px] text-muted-foreground mt-0.5">{item.desc}</span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                      {/* Right: Engineer */}
-                      <div className="flex flex-col gap-3.5">
-                        <span className="text-[9px] font-black text-primary tracking-widest uppercase border-b border-border/20 pb-1.5 flex items-center gap-1">
-                          <Cpu className="w-3 h-3" /> Engineer
-                        </span>
-                        <div className="flex flex-col gap-3">
-                          {[
-                            { name: "Platform Deployment", desc: "Install the Akashic Core." },
-                            { name: "Legacy Modernization", desc: "Migrate monoliths safely." },
-                            { name: "Custom Accelerators", desc: "Build tailored AI outcomes." }
-                          ].map((item, idx) => (
-                            <a key={idx} href="#implementation-layer" className="flex flex-col group">
-                              <span className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">{item.name}</span>
-                              <span className="text-[10px] text-muted-foreground mt-0.5">{item.desc}</span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* 4. Insights */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("insights")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
-                Insights
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-              <AnimatePresence>
-                {activeDropdown === "insights" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 top-full pt-2 w-56"
-                  >
-                    <div className="rounded-xl p-3 shadow-2xl border border-border/40 glass-effect flex flex-col gap-2.5">
-                      {["Customer Stories", "Perspectives", "Documentation", "Guides"].map((item, idx) => (
-                        <a key={idx} href="#use-case-cards" className="text-xs font-semibold hover:text-primary transition-colors text-foreground/80">
-                          {item}
-                        </a>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* 5. Company / Mission */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("company")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 py-3 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
-                Company
-                <ChevronDown className="w-3.5 h-3.5" />
-              </button>
-              <AnimatePresence>
-                {activeDropdown === "company" && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute right-0 top-full pt-2 w-48"
-                  >
-                    <div className="rounded-xl p-3 shadow-2xl border border-border/40 glass-effect flex flex-col gap-2.5">
-                      {["About Us", "Careers", "Recognition"].map((item, idx) => (
-                        <a key={idx} href="#footer" className="text-xs font-semibold hover:text-primary transition-colors text-foreground/80">
-                          {item}
-                        </a>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </nav>
 
           {/* Right Action buttons */}
@@ -385,27 +297,32 @@ export default function Home() {
               className="lg:hidden border-t border-border/20 overflow-hidden bg-background/95 backdrop-blur-xl"
             >
               <div className="px-6 py-6 flex flex-col gap-6 max-h-[80vh] overflow-y-auto">
-                {["Platform", "Offerings", "Delivery", "Insights", "Company"].map((key) => (
+                {Object.entries(sitemap).map(([key, group]) => (
                   <div key={key} className="flex flex-col gap-2">
-                    <span className="text-xs font-bold text-primary tracking-widest uppercase">
-                      {key}
+                    <span className="text-xs font-bold text-primary tracking-widest uppercase border-b border-border/10 pb-1">
+                      {group.label}
                     </span>
                     <div className="grid grid-cols-1 gap-2 pl-2">
-                      {key === "Platform" && ["Akashic Data Warehouse", "Akashic Data Pipeline", "Akashic BI", "Akashic Insights", "AML", "Master Data", "Governance", "Workflow"].map((item, idx) => (
-                        <a key={idx} href="#introducing-akashic" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">{item}</a>
-                      ))}
-                      {key === "Offerings" && ["Akashic EIS", "Akashic Life", "Akashic Knowledge", "Public Sector", "Healthcare", "Education", "Enterprise"].map((item, idx) => (
-                        <a key={idx} href="#serve-section" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">{item}</a>
-                      ))}
-                      {key === "Delivery" && ["AI Readiness Audit", "Sovereign Blueprint", "Governance Framework", "Platform Deployment", "Legacy Modernization", "Custom Accelerators"].map((item, idx) => (
-                        <a key={idx} href="#implementation-layer" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">{item}</a>
-                      ))}
-                      {key === "Insights" && ["Customer Stories", "Perspectives", "Documentation", "Guides"].map((item, idx) => (
-                        <a key={idx} href="#use-case-cards" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">{item}</a>
-                      ))}
-                      {key === "Company" && ["About Us", "Careers", "Recognition"].map((item, idx) => (
-                        <a key={idx} href="#footer" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">{item}</a>
-                      ))}
+                      {group.isTwoCol ? (
+                        <>
+                          {group.col1Items?.map((item, idx) => (
+                            <a key={idx} href="#talk-to-us" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">
+                              {item.name}
+                            </a>
+                          ))}
+                          {group.col2Items?.map((item, idx) => (
+                            <a key={idx} href="#talk-to-us" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">
+                              {typeof item === "string" ? item : item.name}
+                            </a>
+                          ))}
+                        </>
+                      ) : (
+                        group.items?.map((item, idx) => (
+                          <a key={idx} href="#talk-to-us" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/80 hover:text-primary">
+                            {item.name}
+                          </a>
+                        ))
+                      )}
                     </div>
                   </div>
                 ))}
@@ -423,529 +340,149 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
-      {/* HERO SECTION */}
-      <section className="relative pt-32 pb-16 z-10 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 min-h-[90vh]">
-        {/* Left Column: Headline Copy */}
-        <div className="flex-1 flex flex-col items-start text-left">
-          <div className="mb-4 px-3.5 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-wider">
-            DHIRA: Powering Leadership Momentum through a Shared Intelligence Layer
-          </div>
+      {/* SECTION 01: HERO — ABOVE THE FOLD */}
+      <section className="relative min-h-[90vh] pt-32 pb-20 flex items-center justify-center z-10 px-6">
+        <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
           
-          <h1 className="font-outfit font-black tracking-tight text-5xl md:text-7xl lg:text-8xl text-foreground leading-[0.95]">
-            Turn <br />
-            Complexity <br />
-            Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Clarity.</span>
-          </h1>
+          {/* Animated award badge */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-6 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1.5"
+          >
+            <Award className="w-4 h-4" />
+            Maha Hackathon & Telangana AI Rising 2025 Winner
+          </motion.div>
 
-          <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed max-w-md font-medium">
-            You wouldn't build an engine just to drive to work. <br className="hidden sm:inline" />
-            So why build a data stack just to get an answer?
-          </p>
+          {/* Primary Headline */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="font-outfit font-black tracking-tight text-5xl md:text-7xl lg:text-8xl text-foreground leading-[0.95] max-w-4xl"
+          >
+            From Data. <br />
+            To Decisions. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">At Scale.</span>
+          </motion.h1>
+
+          {/* Sub-headline */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-8 text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed font-medium"
+          >
+            DHIRA partners with governments and enterprises to design, build, and deploy intelligent systems — from strategy to production. Powered by Akashic, our unified AI and data platform.
+          </motion.p>
 
           {/* Action buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          >
             <a 
-              href="#introducing-akashic" 
-              className="px-8 py-3.5 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground font-bold transition-all shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 text-center flex items-center justify-center gap-2"
+              href="#platform-intro" 
+              className="px-8 py-3.5 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground font-bold transition-all shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 text-center"
             >
-              Start Engine <Play className="w-4 h-4 fill-current" />
+              See Akashic in Action
             </a>
             <a 
-              href="#use-case-cards" 
+              href="#talk-to-us" 
               className="px-8 py-3.5 rounded-full border border-border bg-background/40 hover:bg-secondary text-foreground font-bold transition-all hover:-translate-y-0.5 text-center backdrop-blur-sm"
             >
-              Explore Use Cases
+              Talk to Our Team
             </a>
-          </div>
-
-          {/* Connected Integrations list */}
-          <div className="mt-12 flex flex-col gap-2">
-            <span className="text-[9px] uppercase font-bold tracking-[0.25em] text-muted-foreground">
-              Unified Integrations Engine
-            </span>
-            <div className="flex items-center gap-4 text-xs font-black text-foreground">
-              <span className="px-3 py-1 rounded bg-secondary/80 border border-border flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span> SAP
-              </span>
-              <span className="px-3 py-1 rounded bg-secondary/80 border border-border flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span> SALESFORCE
-              </span>
-              <span className="px-3 py-1 rounded bg-secondary/80 border border-border flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span> ORACLE
-              </span>
-            </div>
-            <span className="text-[9px] text-muted-foreground mt-1 flex items-center gap-1">
-              <Activity className="w-3 h-3 text-success animate-pulse" /> Live Unified View • Real-Time Dashboard • Scroll to Explore
-            </span>
-          </div>
-        </div>
-
-        {/* Right Column: Interactive Dashboard Visualization Mockup */}
-        <div className="flex-1 w-full lg:max-w-xl">
-          <div className="rounded-2xl shadow-2xl border border-border/30 glass-effect p-5 md:p-6 flex flex-col gap-5 relative overflow-hidden">
-            {/* Top Bar metrics */}
-            <div className="flex items-center justify-between border-b border-border/15 pb-4">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-success animate-ping"></span>
-                <span className="text-[10px] font-bold text-foreground uppercase tracking-widest">LIVE</span>
-                <span className="text-[10px] text-muted-foreground">98.4% Confidence • Verified 2m ago</span>
-              </div>
-              <span className="text-[9px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded uppercase">
-                Akashic BI
-              </span>
-            </div>
-
-            {/* Middle part: Gross Margin Trend metric */}
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold text-muted-foreground">Gross Margin Trend</span>
-                  <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-2xl font-black text-foreground">$44M</span>
-                    <span className="text-xs text-red-500 font-bold flex items-center gap-0.5">
-                      <TrendingDown className="w-3.5 h-3.5" /> -4.2% Variance
-                    </span>
-                  </div>
-                </div>
-                {/* Historical vs Forecasted legend */}
-                <div className="text-[9px] font-bold text-muted-foreground flex flex-col gap-1 text-right">
-                  <span className="flex items-center gap-1 justify-end"><span className="w-2 h-2 rounded-full bg-primary"></span> Historical</span>
-                  <span className="flex items-center gap-1 justify-end"><span className="w-2 h-2 rounded-full bg-accent"></span> Forecasted</span>
-                </div>
-              </div>
-
-              {/* Live SVG Line Chart representing the margin data */}
-              <div className="h-32 w-full relative mt-2">
-                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  {/* Grid lines */}
-                  <line x1="0" y1="25" x2="100" y2="25" stroke="var(--border)" strokeWidth="0.5" strokeDasharray="3,3" />
-                  <line x1="0" y1="50" x2="100" y2="50" stroke="var(--border)" strokeWidth="0.5" strokeDasharray="3,3" />
-                  <line x1="0" y1="75" x2="100" y2="75" stroke="var(--border)" strokeWidth="0.5" strokeDasharray="3,3" />
-                  
-                  {/* Historical path */}
-                  <path d="M 0 80 L 20 75 L 40 68 L 60 78" fill="none" stroke="var(--primary)" strokeWidth="2.5" />
-                  <circle cx="60" cy="78" r="3" fill="var(--primary)" />
-                  
-                  {/* Forecasted path */}
-                  <path d="M 60 78 L 80 84 L 100 89" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeDasharray="3,3" />
-                  <circle cx="100" cy="89" r="3" fill="var(--accent)" />
-                </svg>
-                {/* Date labels */}
-                <div className="flex justify-between text-[9px] text-muted-foreground mt-1 font-bold">
-                  <span>Oct 1</span>
-                  <span>Oct 11</span>
-                  <span>Oct 21</span>
-                  <span>Nov 5</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Department health list & Dynamic Pricing KPI */}
-            <div className="grid grid-cols-12 gap-4 border-t border-border/15 pt-4">
-              {/* Department grid */}
-              <div className="col-span-7 flex flex-col gap-1.5">
-                <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-                  Department Health
-                </span>
-                <div className="grid grid-cols-3 gap-1.5 text-[9px] font-black text-foreground">
-                  <span className="px-1.5 py-1 rounded bg-success/10 text-success border border-success/15 text-center">Sales</span>
-                  <span className="px-1.5 py-1 rounded bg-success/10 text-success border border-success/15 text-center">Finance</span>
-                  <span className="px-1.5 py-1 rounded bg-red-500/10 text-red-500 border border-red-500/15 text-center">Logistics</span>
-                  <span className="px-1.5 py-1 rounded bg-success/10 text-success border border-success/15 text-center">HR</span>
-                  <span className="px-1.5 py-1 rounded bg-success/10 text-success border border-success/15 text-center">Marketing</span>
-                  <span className="px-1.5 py-1 rounded bg-success/10 text-success border border-success/15 text-center">IT</span>
-                </div>
-              </div>
-
-              {/* AI optimized pricing indicator */}
-              <div className="col-span-5 flex flex-col justify-between p-2.5 rounded-xl border border-primary/20 bg-primary/5">
-                <span className="text-[8px] font-bold text-primary uppercase tracking-widest block">
-                  AI Dynamic Pricing
-                </span>
-                <span className="text-base font-black text-foreground block mt-1">
-                  +$14.2k
-                </span>
-                <span className="text-[8px] text-muted-foreground block">
-                  saved daily (Baseline vs AI)
-                </span>
-              </div>
-            </div>
-
-            {/* Real-time scrolling/animating system logs console */}
-            <div className="border-t border-border/15 pt-3">
-              <div className="flex items-center gap-1.5 mb-1.5 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-                <Terminal className="w-3 h-3 text-primary" /> Live Pipeline Stream
-              </div>
-              <div className="rounded bg-black/40 border border-border/20 p-2.5 font-mono text-[9px] flex flex-col gap-1 text-primary-foreground max-h-20 overflow-hidden select-none">
-                {logs.map((log, idx) => (
-                  <div key={idx} className={`truncate transition-all ${idx === 0 ? "text-primary animate-pulse" : "opacity-60"}`}>
-                    {log}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* INTERACTIVE MARGIN SLIPPAGE Q&A MOCKUP */}
-      <section className="relative z-10 py-16 px-6 max-w-4xl mx-auto">
-        <div className="rounded-2xl border border-primary/25 p-6 md:p-8 glass-effect flex flex-col gap-5">
-          <div className="flex items-center justify-between border-b border-border/20 pb-4">
-            <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1">
-              <HelpCircle className="w-4 h-4" /> Real-time Decisional Q&A Example
+      {/* SECTION 02: NATIONAL SCALE CREDENTIALS STRIP */}
+      <section className="relative z-10 border-y border-border/20 py-10 glass-effect">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-8">
+            <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-primary">
+              THE TEAM BEHIND INDIA'S LARGEST DIGITAL PLATFORMS
             </span>
-            <span className="text-[10px] font-bold text-muted-foreground">Akashic Reasoning Layer</span>
           </div>
 
-          {/* User question bubble */}
-          <div className="self-end max-w-[85%] bg-primary text-primary-foreground p-3.5 rounded-xl rounded-tr-none text-xs leading-relaxed flex flex-col gap-1.5">
-            <span className="font-bold text-[9px] opacity-75">User: Analyst</span>
-            <p className="font-medium">Why is the 30-day margin trend slipping despite record bookings?</p>
-          </div>
-
-          {/* Akashic Answer Bubble */}
-          <div className="self-start max-w-[85%] bg-secondary/80 border border-border/30 p-4 rounded-xl rounded-tl-none text-xs leading-relaxed flex flex-col gap-2.5">
-            <span className="font-bold text-[9px] text-primary uppercase tracking-wider">Akashic Core</span>
-            <p className="font-medium text-foreground">
-              Correlation detected: 15% spike in APAC Supplier Latency started 12 days ago. This is driving up freight costs and eroding margins.
-            </p>
-            <div className="flex items-center gap-2 mt-2">
-              <button className="px-3 py-1 rounded bg-background border border-border text-[9px] font-bold hover:bg-secondary transition-all flex items-center gap-1">
-                <ArrowUpRight className="w-3 h-3" /> Share Insight
-              </button>
-              <span className="text-[9px] text-muted-foreground italic">Grounding: SAP Logistics + Oracle Finance logs</span>
-            </div>
-          </div>
-
-          {/* Input field */}
-          <div className="mt-4 flex items-center gap-3 border-t border-border/20 pt-4">
-            <input 
-              type="text" 
-              placeholder="Ask Akashic about margin impact..."
-              className="flex-1 px-4 py-2.5 rounded-full border border-border bg-secondary/50 focus:outline-none focus:border-primary text-xs text-foreground"
-              disabled
-            />
-            <button className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold opacity-60 cursor-not-allowed">
-              Send
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* THE STRUCTURAL DIAGNOSTIC */}
-      <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-12 gap-12">
-          {/* Copy Column */}
-          <div className="lg:col-span-5 flex flex-col items-start justify-center text-left">
-            <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
-              The Structural Diagnostic
-            </span>
-            <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4 leading-tight">
-              Organizations didn't become data-rich by accident. <br />
-              They became decision-poor by design.
-            </h2>
-            <p className="text-sm text-muted-foreground mt-6 leading-relaxed">
-              Enterprises optimize for data generation while neglecting how decisions are actually aligned, verified, and evolved.
-            </p>
-
-            {/* Diagnostic Conclusion & Basis badges */}
-            <div className="mt-8 flex flex-col gap-4 border-t border-border/15 pt-6 w-full">
-              <div className="flex gap-3">
-                <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-primary text-xs font-bold shrink-0 mt-0.5">✓</div>
-                <div>
-                  <span className="text-xs font-bold text-foreground block">Diagnostic Conclusion</span>
-                  <span className="text-xs text-muted-foreground">Slower strategic cycles, fragmented accountability, and a reactive posture.</span>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-primary text-xs font-bold shrink-0 mt-0.5">✓</div>
-                <div>
-                  <span className="text-xs font-bold text-foreground block">Diagnostic Basis</span>
-                  <span className="text-xs text-muted-foreground">Observed across global transformation programs and maturity assessments.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 4 Cards Column */}
-          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 text-center">
             {[
-              {
-                num: "01",
-                label: "Disconnected Silos",
-                title: "Fragile Architecture",
-                desc: "Local optimization across hundreds of disconnected systems."
-              },
-              {
-                num: "02",
-                label: "Reconciliation Gap",
-                title: "Manual Overhead",
-                desc: "Leadership time lost to reconciling conflicting data inputs."
-              },
-              {
-                num: "03",
-                label: "Static Feedback",
-                title: "Reactive Posture",
-                desc: "Static historical summaries failing in dynamic conditions."
-              },
-              {
-                num: "04",
-                label: "System Loss",
-                title: "Decisional Momentum",
-                desc: "Insights are produced, reviewed, and then lost — never compounding.",
-                highlight: "-42%"
-              }
-            ].map((item, idx) => (
-              <div 
-                key={idx} 
-                className={`p-6 rounded-2xl glass-effect border transition-all duration-300 flex flex-col justify-between ${
-                  activeDiagnostic === idx 
-                    ? "border-primary/40 bg-primary/5" 
-                    : "border-border/30 hover:border-primary/20"
-                }`}
-                onMouseEnter={() => setActiveDiagnostic(idx)}
-              >
-                <div>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-xs font-black text-primary font-outfit">{item.num}</span>
-                    {item.highlight && (
-                      <span className="text-xs font-bold text-red-500 bg-red-500/10 px-2 py-0.5 rounded">{item.highlight}</span>
-                    )}
-                  </div>
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{item.label}</span>
-                  <h3 className="font-outfit font-bold text-lg text-foreground mt-1 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
+              { stat: "2+ Billion vaccinations", label: "CoWIN / U-WIN" },
+              { stat: "5+ Billion learning sessions", label: "DIKSHA" },
+              { stat: "100M+ children & mothers", label: "Poshan Tracker" },
+              { stat: "300K foreign employers", label: "eMigrate" },
+              { stat: "10M+ SHGs managed", label: "LokOS" },
+              { stat: "18M+ youth beneficiaries", label: "Yuva / My Bharat" }
+            ].map((cred, idx) => (
+              <div key={idx} className="flex flex-col">
+                <span className="font-outfit font-black text-lg md:text-xl text-foreground">
+                  {cred.stat.split(" ")[0]}
+                </span>
+                <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mt-0.5">
+                  {cred.stat.split(" ").slice(1).join(" ")}
+                </span>
+                <span className="text-xs text-foreground font-medium mt-1">
+                  {cred.label}
+                </span>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* THE COGNITIVE GAP */}
-      <section className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-xs font-bold tracking-widest text-primary uppercase">
-              The Cognitive Gap
-            </span>
-            <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
-              The challenge isn't understanding data. It's operationalizing decisions.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-2xl bg-background/75 border border-border/30 hover:border-primary/20 transition-all">
-              <span className="text-2xl font-black text-primary font-outfit block mb-4">01</span>
-              <h3 className="font-outfit font-bold text-xl md:text-2xl text-foreground mb-3">
-                Capturing Decision Context
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Moving beyond reporting to capture the *why* behind every decision — so institutional logic is preserved across teams, departments, and over time.
-              </p>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-background/75 border border-border/30 hover:border-primary/20 transition-all">
-              <span className="text-2xl font-black text-primary font-outfit block mb-4">02</span>
-              <h3 className="font-outfit font-bold text-xl md:text-2xl text-foreground mb-3">
-                Unified Operational Intelligence
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Creating a shared intelligence layer where business rules, data quality, and strategic intent converge — enabling consistent, automated execution.
-              </p>
-            </div>
+          {/* Badges strip */}
+          <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest border-t border-border/10 pt-6">
+            <span>Startup India Recognized</span>
+            <span className="opacity-30">•</span>
+            <span>MSME Registered</span>
+            <span className="opacity-30">•</span>
+            <span>Winner: Maha Hackathon 2025</span>
+            <span className="opacity-30">•</span>
+            <span>Winner: Telangana AI Rising 2025</span>
           </div>
         </div>
       </section>
 
-      {/* INTRODUCING AKASHIC */}
-      <section id="introducing-akashic" className="relative z-10 py-24 px-6 max-w-5xl mx-auto text-center">
-        <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
-          Introducing Akashic
-        </span>
-        <h2 className="font-outfit font-black text-3xl md:text-6xl text-foreground mt-4 leading-tight">
-          The System That Turns Decisions Into Action.
-        </h2>
-        
-        <p className="text-sm text-muted-foreground mt-6 leading-relaxed max-w-2xl mx-auto">
-          Akashic integrates across systems to preserve context — not just insights. It anchors decisions to data, governing rules, and outcomes, creating a shared intelligence that evolves with the business.
-        </p>
-        <p className="text-sm text-muted-foreground mt-4 leading-relaxed max-w-2xl mx-auto">
-          By unifying governance, quality, and reasoning into a single layer, Akashic allows teams to execute and strategize using a common, natural language.
-        </p>
-
-        {/* Action buttons */}
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a href="#talk-to-us" className="px-6 py-3 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md">
-            See how Akashic works
-          </a>
-          <a href="#introducing-akashic" className="px-6 py-3 rounded-full border border-border hover:bg-secondary text-foreground text-xs font-bold transition-all">
-            Explore the platform
-          </a>
-        </div>
-
-        {/* Dynamic horizontal block layers diagram */}
-        <div className="mt-16 flex flex-col gap-3 max-w-2xl mx-auto text-xs font-bold">
-          {[
-            "Business Decisions",
-            "Operational Execution",
-            "Data Governance",
-            "Data Quality & Trust",
-            "Analytics & Insights",
-            "AI-Assisted Reasoning"
-          ].map((layer, idx) => (
-            <div 
-              key={idx} 
-              className="py-4 rounded-xl border border-border/30 bg-background/50 hover:border-primary/30 transition-all flex items-center justify-between px-6 shadow-sm group"
-            >
-              <span className="text-muted-foreground font-mono">{`[0${idx+1}]`}</span>
-              <span className="text-foreground group-hover:text-primary transition-colors">{layer}</span>
-              <div className="w-2 h-2 rounded-full bg-primary/30 group-hover:bg-primary transition-colors"></div>
-            </div>
-          ))}
-          
-          {/* Logo badge */}
-          <div className="mt-8 flex items-center justify-center gap-2">
-            <div className="w-8 h-8 rounded bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">
-              Δ
-            </div>
-            <span className="font-outfit font-black tracking-widest text-lg text-foreground uppercase">
-              AKASHIC
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* THE IMPLEMENTATION LAYER */}
-      <section id="implementation-layer" className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-12">
-            
-            {/* Left Column Description */}
-            <div className="lg:col-span-5 flex flex-col items-start justify-center text-left">
-              <span className="text-xs font-bold tracking-widest text-primary uppercase">
-                The Implementation layer
-              </span>
-              <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4 leading-tight">
-                Intelligent Transformation. <br />
-                Delivered End-to-End.
-              </h2>
-              <p className="text-sm text-muted-foreground mt-6 leading-relaxed">
-                We solve the decision fragmentation problem through strategy, engineering, and intelligence platforms — not in isolation, but as one coherent system.
-              </p>
-              <p className="text-sm text-muted-foreground mt-4 leading-relaxed font-bold">
-                DHIRA is not just a platform company. We are not just a consulting firm.
-              </p>
-              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                We partner with organizations to design, build, and operationalize intelligence — from executive strategy to production systems.
-              </p>
-              <div className="mt-8 flex gap-4">
-                <a href="#talk-to-us" className="px-6 py-3 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md">
-                  Start the Journey
-                </a>
-                <a href="#talk-to-us" className="text-xs font-bold text-foreground hover:text-primary transition-colors flex items-center gap-1">
-                  Explore How We Deliver →
-                </a>
-              </div>
-            </div>
-
-            {/* Right Column: 4 System Modules */}
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
-              {[
-                {
-                  num: "[01]",
-                  title: "Strategic Intelligence & Advisory",
-                  desc: "We work with leadership teams to align strategy, data, and operating models — defining how intelligence should function across the organization before systems are built."
-                },
-                {
-                  num: "[02]",
-                  title: "Bespoke Product & Platform Engineering",
-                  desc: "We design and build intelligence-native platforms and products where decision context, governance, and execution are engineered into the foundation — not added later."
-                },
-                {
-                  num: "[03]",
-                  title: "Akashic as an Intelligence Accelerator",
-                  desc: "Akashic can be deployed as a core platform or used to accelerate larger transformation initiatives — preserving decision context and organizational memory across systems."
-                },
-                {
-                  num: "[04]",
-                  title: "Custom AI & Decision Systems",
-                  desc: "We build domain-specific AI and decision systems grounded in real organizational context — enabling explainable reasoning, governed automation, and trustworthy outcomes."
-                }
-              ].map((module, idx) => (
-                <div key={idx} className="p-6 rounded-2xl bg-background/60 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs font-black text-primary font-mono block mb-3">{module.num}</span>
-                    <h3 className="font-outfit font-bold text-base text-foreground mb-3">
-                      {module.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {module.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHEN INTELLIGENCE MEETS REALITY (POPULATION SCALE) */}
-      <section id="serve-section" className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+      {/* SECTION 03: PROBLEM STATEMENT */}
+      <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
-            When Intelligence Meets Reality
+            THE PROBLEM WE SOLVE
           </span>
-          <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
-            Built for Population Scale
+          <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4 max-w-3xl mx-auto leading-tight">
+            Your data is everywhere. Your decisions can't wait. Your teams are still working in silos.
           </h2>
-          <p className="text-sm text-muted-foreground mt-4 max-w-xl mx-auto leading-relaxed">
-            Intelligence that cannot scale is theory. We engineer decision systems that remain resilient under national and enterprise-level load.
-          </p>
         </div>
 
-        {/* 3 Metrics */}
-        <div className="grid md:grid-cols-3 gap-8 text-center mb-16 border-b border-border/10 pb-16">
-          {[
-            { value: "100M+", label: "Live Concurrency" },
-            { value: "99.999%", label: "Uptime" },
-            { value: "< 12 ms", label: "Latency" }
-          ].map((stat, idx) => (
-            <div key={idx} className="flex flex-col">
-              <span className="font-outfit font-black text-5xl md:text-6xl text-foreground">
-                {stat.value}
-              </span>
-              <span className="text-xs font-bold uppercase tracking-widest text-primary mt-2">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Pillars */}
+        {/* 3 columns rows */}
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              title: "DPI-Grade Resilience",
-              desc: "Engineered for zero downtime. Battle-tested on national digital platforms serving over 100 million users simultaneously."
+              icon: <Layers className="w-6 h-6 text-primary" />,
+              title: "Fragmented Data",
+              desc: "Citizen records in 12 systems. Sales data in 6 tools. Nobody has a single version of the truth."
             },
             {
-              title: "Akashic as an Accelerator",
-              desc: "We deploy the Akashic Core to bypass the first 12 months of ingestion, governance, and reasoning — accelerating deployment without platform lock-in."
+              icon: <LineChart className="w-6 h-6 text-primary" />,
+              title: "Delayed Decisions",
+              desc: "Reports take days. By the time insight reaches the decision-maker, the moment has passed."
             },
             {
-              title: "Future-Proof Architecture",
-              desc: "Modular, cloud-native systems designed for continuous evolution. No throwaway code. No brittle foundations."
+              icon: <Zap className="w-6 h-6 text-primary" />,
+              title: "Tool Overload",
+              desc: "Separate ETL, BI, ML, and workflow tools. High cost. Low interoperability. No governance."
             }
           ].map((item, idx) => (
-            <div key={idx} className="flex flex-col">
-              <h3 className="font-outfit font-bold text-lg text-foreground mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            <div 
+              key={idx} 
+              className="p-8 rounded-2xl glass-effect border border-border/30 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="w-12 h-12 rounded bg-primary/10 flex items-center justify-center mb-6">
+                {item.icon}
+              </div>
+              <h3 className="font-outfit font-bold text-lg text-foreground mb-3">
                 {item.title}
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -954,93 +491,604 @@ export default function Home() {
             </div>
           ))}
         </div>
-
-        <div className="text-center mt-12">
-          <a href="#talk-to-us" className="text-xs font-bold text-primary hover:text-primary-hover transition-colors inline-flex items-center gap-1">
-            See How We Deliver at Scale <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
       </section>
 
-      {/* VELOCITY PROTOCOL */}
-      <section id="use-case-cards" className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
+      {/* SECTION 04: THREE OFFERINGS */}
+      <section className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs font-bold tracking-widest text-primary uppercase">
-              Velocity Protocol
+              WHAT DHIRA DOES
             </span>
             <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
-              Momentum is Engineered. <br className="hidden sm:inline" />
-              We don't ask for faith. We ask for 6 weeks.
+              We design it. We build it. We power it.
             </h2>
-            <p className="text-sm text-muted-foreground mt-4 max-w-xl mx-auto leading-relaxed">
-              Our protocol is designed to validate value before you scale.
-            </p>
           </div>
 
-          {/* 3 Step Process */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                num: "01",
-                label: "Precision Audit",
-                title: "We Map The Terrain.",
-                desc: "We scan your entire data landscape to identify the single highest-value leverage point. No guesswork."
+                label: "We Design It",
+                title: "STRATEGIC ADVISORY",
+                desc: "Data strategy, AI readiness assessments, and program design for governments and enterprises ready to transform.",
+                link: "Explore Advisory →"
               },
               {
-                num: "02",
-                label: "Rapid Prototype",
-                title: "The 4-Week Pilot.",
-                desc: "In 4 weeks, we deploy a functional pilot. We validate ROI with live data before you commit to the full build."
+                label: "We Build It",
+                title: "PLATFORM ENGINEERING",
+                desc: "Custom platform development, government digital infrastructure, rapid prototyping, and AI accelerators. CBSE POC: delivered in 1.5 months.",
+                link: "See What We Build →"
               },
               {
-                num: "03",
-                label: "Population Scale",
-                title: "Global Velocity.",
-                desc: "Once proven, we hit the accelerator. We expand the engineering mesh to handle 100M+ concurrency."
+                label: "We Power It",
+                title: "AKASHIC PLATFORM",
+                desc: "DHIRA's unified AI and data platform. 10 modules from ingestion to governance. Cloud, on-premises, or hybrid.",
+                link: "Explore Akashic →"
               }
-            ].map((step, idx) => (
-              <div key={idx} className="p-8 rounded-2xl bg-background/80 border border-border/30 flex flex-col justify-between gap-6">
+            ].map((offering, idx) => (
+              <div 
+                key={idx}
+                className="p-8 rounded-2xl bg-background/55 border border-border/30 hover:border-primary/20 hover:bg-background/90 transition-all flex flex-col justify-between"
+              >
                 <div>
-                  <span className="text-xs font-black text-primary font-outfit">{step.num}</span>
-                  <span className="block text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-2">{step.label}</span>
-                  <h3 className="font-outfit font-bold text-lg text-foreground mt-1 mb-3">
-                    {step.title}
+                  <span className="text-[10px] font-bold tracking-widest text-primary uppercase">
+                    {offering.label}
+                  </span>
+                  <h3 className="font-outfit font-bold text-xl text-foreground mt-2 mb-4">
+                    {offering.title}
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-6">
+                    {offering.desc}
+                  </p>
+                </div>
+                <a href="#talk-to-us" className="text-xs font-bold text-primary hover:text-primary-hover transition-all">
+                  {offering.link}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 05: AKASHIC PLATFORM INTRO */}
+      <section id="platform-intro" className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left info column */}
+          <div className="lg:col-span-5 text-left">
+            <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
+              THE PLATFORM — MEET AKASHIC
+            </span>
+            <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4 leading-tight">
+              One Platform. Every Layer. Raw Data to Live Decisions.
+            </h2>
+            <p className="text-xs text-muted-foreground mt-6 leading-relaxed">
+              Akashic is DHIRA's unified AI and data platform. It handles everything — data ingestion, master data management, business intelligence, machine learning, workflow automation, and data governance — in one connected system. Cloud, on-premises, or hybrid.
+            </p>
+            <div className="mt-8">
+              <a 
+                href="#talk-to-us" 
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md"
+              >
+                Explore the Full Platform <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right capabilities blocks */}
+          <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+            {[
+              {
+                icon: <Database className="w-6 h-6 text-primary" />,
+                title: "📥 Data Capabilities",
+                desc: "Unified ETL · Master Data Management · Governance · Secure Data Lake"
+              },
+              {
+                icon: <LineChart className="w-6 h-6 text-primary" />,
+                title: "📊 BI Capabilities",
+                desc: "Interactive Dashboards · Custom Reports · Real-time KPIs · Role-Based Analytics"
+              },
+              {
+                icon: <Sparkles className="w-6 h-6 text-primary" />,
+                title: "🤖 AI Capabilities",
+                desc: "Predictive Modeling · Anomaly Detection · Multilingual NLP · Conversational AI"
+              },
+              {
+                icon: <Network className="w-6 h-6 text-primary" />,
+                title: "⚡ Workflow & Automation",
+                desc: "Business Rule Engine · Process Orchestration · Automated Alerts · Low-Code Builder"
+              }
+            ].map((block, idx) => (
+              <div key={idx} className="p-6 rounded-xl glass-effect border border-border/20 flex gap-4">
+                <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center shrink-0 mt-1">
+                  {block.icon}
+                </div>
+                <div>
+                  <h3 className="font-outfit font-bold text-sm text-foreground mb-1">
+                    {block.title}
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    {step.desc}
+                    {block.desc}
                   </p>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Acceleration Protocol console action box */}
-          <div className="p-8 md:p-12 rounded-3xl border border-primary/20 bg-background/50 text-center max-w-3xl mx-auto relative overflow-hidden">
-            <span className="text-[10px] font-bold text-success uppercase tracking-widest flex items-center justify-center gap-1.5 mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-success animate-ping"></span>
-              Acceleration Protocol Online
-            </span>
-            <h3 className="font-outfit font-bold text-2xl md:text-3xl text-foreground mb-4">
-              Stop Guessing. Start Steering.
-            </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed max-w-md mx-auto mb-8">
-              The dashboard is ready. The engineering is proven. <br />
-              The pilot takes 6 weeks.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#talk-to-us" className="px-6 py-3 rounded-full bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md">
-                Book Your 6-Week Pilot
+      {/* SECTION 06: WHO WE SERVE */}
+      <section id="who-we-serve" className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground">
+              Governments. Enterprises. Both Served Differently.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Government card */}
+            <div className="p-8 md:p-10 rounded-2xl bg-background/60 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold tracking-widest text-primary uppercase">
+                  🏛️ FOR GOVERNMENT
+                </span>
+                <h3 className="font-outfit font-bold text-2xl text-foreground mt-2 mb-4">
+                  Ministries, States & Public Sector
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-8">
+                  We have delivered 6 national DPI platforms touching billions of lives. We understand Ministry workflows, data sovereignty requirements, and multi-stakeholder governance.
+                </p>
+                
+                <ul className="flex flex-col gap-3 mb-8">
+                  {[
+                    "On-premises deployment · Full data sovereignty",
+                    "Ministry-scale data pipelines · Grievance workflows",
+                    "Demographic analytics · Scheme performance tracking"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-xs text-foreground/80">
+                      <span className="w-4 h-4 rounded-full bg-success/20 text-success flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3.5 h-3.5" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a 
+                href="#talk-to-us" 
+                className="w-full text-center py-3 rounded-lg border border-border hover:bg-secondary text-foreground text-xs font-bold transition-all"
+              >
+                Request a Ministry Briefing →
               </a>
-              <a href="#serve-section" className="px-6 py-3 rounded-full border border-border hover:bg-secondary text-foreground text-xs font-bold transition-all">
-                Read Case Studies
+            </div>
+
+            {/* Enterprise card */}
+            <div className="p-8 md:p-10 rounded-2xl bg-background/60 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold tracking-widest text-primary uppercase">
+                  🏢 FOR ENTERPRISE
+                </span>
+                <h3 className="font-outfit font-bold text-2xl text-foreground mt-2 mb-4">
+                  BFSI, Healthcare, Retail & Manufacturing
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed mb-8">
+                  From Executive Intelligence Systems to branch-level analytics, we bring predictive AI and automated decision-making to companies at scale. Typically operational within 90 days.
+                </p>
+
+                <ul className="flex flex-col gap-3 mb-8">
+                  {[
+                    "Revenue forecasting · Branch performance dashboards",
+                    "Fraud detection · Churn prediction · Risk scoring",
+                    "Cloud, on-prem, or hybrid · 23+ source connectors"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-xs text-foreground/80">
+                      <span className="w-4 h-4 rounded-full bg-success/20 text-success flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-3.5 h-3.5" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a 
+                href="#talk-to-us" 
+                className="w-full text-center py-3 rounded-lg border border-border hover:bg-secondary text-foreground text-xs font-bold transition-all"
+              >
+                Schedule a Demo →
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA & TALK TO US */}
+      {/* SECTION 07: WHY DHIRA — THE USP STRIP */}
+      <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
+            WHY ORGANIZATIONS CHOOSE DHIRA
+          </span>
+          <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
+            We deliver fast. We secure completely. We scale with you.
+          </h2>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {[
+            {
+              icon: <Zap className="w-5 h-5 text-primary" />,
+              title: "⚡ Fast GTM",
+              desc: "Proof of Concept to delivery in 1.5 months. No bloated timelines."
+            },
+            {
+              icon: <Shield className="w-5 h-5 text-primary" />,
+              title: "🔒 Enterprise Security",
+              desc: "On-premises deployment, data sovereignty, and RBAC built into every module."
+            },
+            {
+              icon: <Sparkles className="w-5 h-5 text-primary" />,
+              title: "🤖 AI-Native Methods",
+              desc: "AI woven into every layer — not bolted on. From NLP to predictive ML in one platform."
+            },
+            {
+              icon: <MessageSquare className="w-5 h-5 text-primary" />,
+              title: "📡 Smooth Communication",
+              desc: "One dedicated team. Clear milestones. Ministry-tested delivery rigor."
+            },
+            {
+              icon: <Layers className="w-5 h-5 text-primary" />,
+              title: "🔁 Modular & Scalable",
+              desc: "Start with one module. Scale to the full platform. No lock-in."
+            }
+          ].map((usp, idx) => (
+            <div key={idx} className="p-6 rounded-xl glass-effect border border-border/20 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded bg-primary/10 flex items-center justify-center mb-4 shrink-0">
+                  {usp.icon}
+                </div>
+                <h3 className="font-outfit font-bold text-sm text-foreground mb-2">
+                  {usp.title}
+                </h3>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  {usp.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 08: USE CASE CARDS */}
+      <section id="use-case-cards" className="relative z-10 py-24 px-6 bg-secondary/15 border-y border-border/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-xs font-bold tracking-widest text-primary uppercase">
+              BUILT FOR REAL PROBLEMS. PROVEN ON REAL PLATFORMS.
+            </span>
+            <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
+              Impact you can measure. From platforms you know.
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Case 1: DIKSHA */}
+            <div className="p-8 rounded-2xl bg-background/80 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between gap-6">
+              <div>
+                <div className="flex items-center justify-between border-b border-border/20 pb-4 mb-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5 font-outfit">
+                    🎓 PUBLIC SECTOR — EDUCATION
+                  </span>
+                  <span className="text-[9px] font-bold text-success bg-success/10 px-2 py-0.5 rounded uppercase">
+                    🟢 Ready to publish
+                  </span>
+                </div>
+                <h3 className="font-outfit font-bold text-2xl text-foreground">
+                  1.89 Crore Students. One National View.
+                </h3>
+                <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+                  DIKSHA national platform: learning sessions, course completions, and content metrics across every state — in a single real-time dashboard powered by Akashic BI.
+                </p>
+
+                {/* Animated graphic mockup for DIKSHA */}
+                <div className="my-6 p-4 rounded-xl border border-border/35 bg-background/50 flex flex-col gap-2">
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+                    Learning Sessions Growth (Jan - Dec 2024)
+                  </span>
+                  <div className="h-20 w-full relative">
+                    <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <path d="M 0 90 Q 25 70 50 40 T 100 15" fill="none" stroke="var(--primary)" strokeWidth="3" />
+                      <circle cx="100" cy="15" r="3.5" fill="var(--primary)" />
+                    </svg>
+                    <div className="flex justify-between text-[8px] text-muted-foreground font-bold mt-1">
+                      <span>Q1</span>
+                      <span>Q2</span>
+                      <span>Q3</span>
+                      <span className="text-foreground">564 Crore Sessions</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 border-t border-border/20 pt-4 text-center">
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">564 Cr</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Sessions Tracked</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">18.25 Cr</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Total Enrolments</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">7,476</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Energized Textbooks</span>
+                  </div>
+                </div>
+              </div>
+              <a href="#talk-to-us" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                Read Impact Study →
+              </a>
+            </div>
+
+            {/* Case 2: eMigrate */}
+            <div className="p-8 rounded-2xl bg-background/80 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between gap-6">
+              <div>
+                <div className="flex items-center justify-between border-b border-border/20 pb-4 mb-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5 font-outfit">
+                    ✈️ PUBLIC SECTOR — LABOUR MINISTRY
+                  </span>
+                  <span className="text-[9px] font-bold text-success bg-success/10 px-2 py-0.5 rounded uppercase">
+                    🟢 Ready to publish
+                  </span>
+                </div>
+                <h3 className="font-outfit font-bold text-2xl text-foreground">
+                  387,000 Emigrations. Tracked, Analyzed, Acted On.
+                </h3>
+                <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+                  eMigrate platform: national emigration volume, destination country breakdowns, demand type analysis — updated in real time for Ministry of External Affairs oversight.
+                </p>
+
+                {/* Destination country bars */}
+                <div className="my-6 p-4 rounded-xl border border-border/35 bg-background/50 flex flex-col gap-2">
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+                    Emigration Demands (2024 Breakdowns)
+                  </span>
+                  <div className="flex flex-col gap-2.5 pt-1.5">
+                    <div className="flex items-center justify-between text-[9px]">
+                      <span className="w-16 font-semibold">Saudi Arabia</span>
+                      <div className="flex-1 mx-2 h-2 bg-secondary rounded overflow-hidden">
+                        <div className="h-full bg-primary" style={{ width: "75%" }}></div>
+                      </div>
+                      <span className="font-bold text-foreground">168K</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[9px]">
+                      <span className="w-16 font-semibold">UAE</span>
+                      <div className="flex-1 mx-2 h-2 bg-secondary rounded overflow-hidden">
+                        <div className="h-full bg-primary" style={{ width: "50%" }}></div>
+                      </div>
+                      <span className="font-bold text-foreground">111K</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 border-t border-border/20 pt-4 text-center">
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">387,063</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Emigrations</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">Top 10</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Destinations</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">2024</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Data Metric</span>
+                  </div>
+                </div>
+              </div>
+              <a href="#talk-to-us" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                Read Impact Study →
+              </a>
+            </div>
+
+            {/* Case 3: Bihar Caste Survey */}
+            <div className="p-8 rounded-2xl bg-background/80 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between gap-6">
+              <div>
+                <div className="flex items-center justify-between border-b border-border/20 pb-4 mb-4">
+                  <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5 font-outfit">
+                    📊 PUBLIC SECTOR — GOVERNANCE ANALYTICS
+                  </span>
+                  <span className="text-[9px] font-bold text-success bg-success/10 px-2 py-0.5 rounded uppercase">
+                    🟢 Ready to publish
+                  </span>
+                </div>
+                <h3 className="font-outfit font-bold text-2xl text-foreground">
+                  A Whole State's Demographics. In One Dashboard.
+                </h3>
+                <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+                  Bihar Caste Survey: population-level education, employment, income, and migration data — visualized with AI-generated narrative summaries for government review.
+                </p>
+
+                {/* Literacy Rate Donut Mockup */}
+                <div className="my-6 p-4 rounded-xl border border-border/35 bg-background/50 flex flex-col gap-2">
+                  <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
+                    District Level Indicators
+                  </span>
+                  <div className="h-20 w-full flex items-center justify-center">
+                    <div className="relative w-14 h-14 rounded-full border-4 border-secondary flex items-center justify-center">
+                      <div className="absolute inset-0 rounded-full border-4 border-primary border-t-transparent border-r-transparent animate-spin" style={{ animationDuration: '4s' }}></div>
+                      <span className="text-[9px] font-black">64.53%</span>
+                    </div>
+                    <div className="ml-4 text-left">
+                      <span className="text-[10px] font-bold block text-foreground">District Literacy Tracked</span>
+                      <span className="text-[9px] text-muted-foreground">AI summaries generated</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 border-t border-border/20 pt-4 text-center">
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">64.53%</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Literacy Rate</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">50.9%</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">Employment</span>
+                  </div>
+                  <div>
+                    <span className="font-outfit font-black text-lg text-foreground">Auto</span>
+                    <span className="block text-[9px] text-muted-foreground mt-0.5">AI Summaries</span>
+                  </div>
+                </div>
+              </div>
+              <a href="#talk-to-us" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                Read Impact Study →
+              </a>
+            </div>
+
+            {/* Case 4: Enterprise Placeholder */}
+            <div className="p-8 rounded-2xl bg-background/80 border border-border/30 hover:border-primary/20 transition-all flex flex-col justify-between gap-6 border-dashed">
+              <div className="opacity-70">
+                <div className="flex items-center justify-between border-b border-border/20 pb-4 mb-4 font-outfit">
+                  <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+                    🏢 ENTERPRISE — PENDING APPROVAL
+                  </span>
+                  <span className="text-[9px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded uppercase">
+                    🟡 Follow up needed
+                  </span>
+                </div>
+                <h3 className="font-outfit font-bold text-2xl text-foreground">
+                  Multi-location Enterprise Intelligence. 90 Days to Live.
+                </h3>
+                <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
+                  Executive Intelligence System for a multi-location enterprise: revenue forecasting, branch performance analytics, and AI-driven operational dashboards — delivered in 90 days.
+                </p>
+                <div className="mt-8 p-4 rounded-xl border border-dashed border-border/40 bg-secondary/35 text-center py-6">
+                  <HelpCircle className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                  <span className="text-xs font-bold text-foreground block">
+                    Contact Rajiv / Naresh for Client Approval
+                  </span>
+                  <span className="text-[10px] text-muted-foreground block mt-1">
+                    (Rajiv is in direct contact with the client)
+                  </span>
+                </div>
+              </div>
+              <span className="text-xs font-bold text-muted-foreground cursor-not-allowed">
+                Pending enterprise approval
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 09: IMPACT NUMBERS STRIP */}
+      <section className="relative z-10 border-y border-border/20 py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+          {[
+            { value: "2B+", desc: "Vaccinations on CoWIN/U-WIN" },
+            { value: "5B+", desc: "Learning sessions on DIKSHA" },
+            { value: "300K", desc: "Foreign employers on eMigrate" },
+            { value: "10M+", desc: "SHGs managed on LokOS" },
+            { value: "18M+", desc: "Youth on Yuva / My Bharat" }
+          ].map((num, idx) => (
+            <div key={idx} className="flex flex-col">
+              <span className="font-outfit font-black text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                {num.value}
+              </span>
+              <span className="text-xs text-muted-foreground mt-2 font-medium">
+                {num.desc}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 10: CUSTOMER STORIES / TESTIMONIALS */}
+      <section className="relative z-10 py-24 px-6 max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1 rounded-full">
+            WHAT OUR CLIENTS SAY
+          </span>
+          <h2 className="font-outfit font-black text-3xl md:text-5xl text-foreground mt-4">
+            Voice of Partners
+          </h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Government official quote */}
+          <div className="p-8 rounded-2xl glass-effect border border-border/30 flex flex-col justify-between">
+            <p className="text-xs text-foreground/90 italic leading-relaxed">
+              "Working with DHIRA transformed how our Ministry processes data. What used to take weeks of reporting is now a live dashboard that any officer can read in seconds."
+            </p>
+            <div className="mt-6 border-t border-border/10 pt-4 flex flex-col">
+              <span className="text-xs font-bold text-foreground">
+                [Ministry Official]
+              </span>
+              <span className="text-[10px] text-muted-foreground">
+                Pending Mukul's PM follow-up
+              </span>
+            </div>
+          </div>
+
+          {/* Enterprise client quote */}
+          <div className="p-8 rounded-2xl glass-effect border border-border/30 flex flex-col justify-between">
+            <p className="text-xs text-foreground/90 italic leading-relaxed">
+              "The Akashic platform gave us something we never had before — a single view of every branch's performance, in real time. Revenue decisions that used to take a week now happen in a meeting."
+            </p>
+            <div className="mt-6 border-t border-border/10 pt-4 flex flex-col">
+              <span className="text-xs font-bold text-foreground">
+                [Enterprise Client]
+              </span>
+              <span className="text-[10px] text-muted-foreground">
+                Pending Rajiv/Naresh approval
+              </span>
+            </div>
+          </div>
+
+          {/* MP Locker */}
+          <div className="p-8 rounded-2xl glass-effect border border-border/30 md:col-span-2 flex flex-col md:flex-row md:items-center justify-between gap-6 border-dashed border-amber-500/30 bg-amber-500/5">
+            <div className="flex-1">
+              <span className="text-xs font-bold text-amber-500 tracking-wider block mb-1">
+                ⭐ HIGH VALUE PIPELINE CASE
+              </span>
+              <h4 className="font-outfit font-bold text-lg text-foreground">
+                MP Locker (Commissioner level testification)
+              </h4>
+              <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                Commissioner is directly involved per Mukul. This is a high-value testimonial representing exceptional credibility for government procurement.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <a 
+                href="#talk-to-us" 
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-black text-xs font-bold transition-all"
+              >
+                Follow up with Mukul
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 11: RECOGNITION STRIP */}
+      <section className="relative z-10 border-y border-border/20 py-10 glass-effect">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-around items-center gap-8 text-center">
+          {[
+            { title: "🏆 Maha Hackathon 2025", sub: "Winner" },
+            { title: "🏆 Telangana AI Rising 2025", sub: "Winner" },
+            { title: "🇮🇳 Startup India", sub: "Recognized" },
+            { title: "📋 MSME", sub: "Registered" }
+          ].map((rec, idx) => (
+            <div key={idx} className="flex flex-col">
+              <span className="font-outfit font-black text-base md:text-lg text-foreground">
+                {rec.title}
+              </span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest mt-0.5">
+                {rec.sub}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 12: FINAL CTA — TALK TO US */}
       <section id="talk-to-us" className="relative z-10 py-24 px-6 max-w-7xl mx-auto">
         <div className="p-8 md:p-16 rounded-3xl border border-border/25 bg-background/70 glass-effect text-center max-w-5xl mx-auto">
           <h2 className="font-outfit font-black text-3xl md:text-6xl text-foreground leading-tight">
@@ -1052,7 +1100,7 @@ export default function Home() {
             <div className="p-6 md:p-8 rounded-xl border border-border/30 bg-background/50 flex flex-col justify-between">
               <div>
                 <h3 className="font-outfit font-bold text-xl text-foreground">
-                  🏛️ For Government
+                  🏛️ FOR GOVERNMENT
                 </h3>
                 <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                   Request a Ministry Briefing. Schedule a dedicated session for your Ministry or department. We cover platform capabilities, DPI track record, and deployment options.
@@ -1063,7 +1111,7 @@ export default function Home() {
                 </div>
               </div>
               <button className="mt-6 w-full py-3 rounded bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md">
-                Request Briefing
+                [ Request Briefing — Ministry Form ]
               </button>
             </div>
 
@@ -1071,7 +1119,7 @@ export default function Home() {
             <div className="p-6 md:p-8 rounded-xl border border-border/30 bg-background/50 flex flex-col justify-between">
               <div>
                 <h3 className="font-outfit font-bold text-xl text-foreground">
-                  🏢 For Enterprise
+                  🏢 FOR ENTERPRISE
                 </h3>
                 <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                   Schedule a Demo or 6-Week Pilot. See Akashic working on your actual data. We offer a structured 6-week pilot with defined outcomes — so you evaluate on real results.
@@ -1082,14 +1130,14 @@ export default function Home() {
                 </div>
               </div>
               <button className="mt-6 w-full py-3 rounded bg-primary hover:bg-primary-hover text-primary-foreground text-xs font-bold transition-all shadow-md">
-                Book Your 6-Week Pilot
+                [ Book a Demo — Enterprise Form ]
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* SECTION 13: FOOTER */}
       <footer id="footer" className="relative z-10 border-t border-border/20 pt-16 pb-32 bg-background/90 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           
@@ -1119,13 +1167,13 @@ export default function Home() {
           {/* Links Column 1 */}
           <div>
             <h4 className="font-outfit font-bold text-sm text-foreground uppercase tracking-widest mb-4">
-              Platform
+              Platform Links
             </h4>
             <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-              <li><a href="#introducing-akashic" className="hover:text-primary transition-colors">Intelligence</a></li>
-              <li><a href="#introducing-akashic" className="hover:text-primary transition-colors">Orchestration</a></li>
-              <li><a href="#introducing-akashic" className="hover:text-primary transition-colors">Security</a></li>
-              <li><a href="#introducing-akashic" className="hover:text-primary transition-colors">Compliance</a></li>
+              <li><a href="#platform-intro" className="hover:text-primary transition-colors">Platform Overview</a></li>
+              <li><a href="#platform-intro" className="hover:text-primary transition-colors">Solutions</a></li>
+              <li><a href="#platform-intro" className="hover:text-primary transition-colors">What We Do</a></li>
+              <li><a href="#platform-intro" className="hover:text-primary transition-colors">What We Build</a></li>
             </ul>
           </div>
 
@@ -1135,37 +1183,34 @@ export default function Home() {
               Company
             </h4>
             <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-              <li><a href="#footer" className="hover:text-primary transition-colors">About</a></li>
+              <li><a href="#footer" className="hover:text-primary transition-colors">About Us</a></li>
               <li><a href="#footer" className="hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#footer" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#footer" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="#footer" className="hover:text-primary transition-colors">Recognition</a></li>
+              <li><a href="#footer" className="hover:text-primary transition-colors">Insights</a></li>
             </ul>
           </div>
 
           {/* Registered Office column */}
           <div>
             <h4 className="font-outfit font-bold text-sm text-foreground uppercase tracking-widest mb-4">
-              Recognition
+              Registered Office
             </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-              Certified by major government and international standards bodies.
-            </p>
-            <div className="flex flex-wrap gap-2 text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
-              <span>Startup India</span>
-              <span>•</span>
-              <span>MSME Registered</span>
-            </div>
+            <address className="text-xs text-muted-foreground not-italic leading-relaxed flex flex-col gap-2">
+              <span>DHIRA Software Labs Pvt. Ltd.</span>
+              <span>Registered office address required for government vendor qualification.</span>
+              <span className="mt-2 text-foreground font-semibold">info@dhira.ai</span>
+            </address>
           </div>
         </div>
 
         {/* Legal bar */}
         <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-border/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] font-medium text-muted-foreground">
           <span>
-            © 2026 DHIRA Software Labs Pvt. Ltd. All rights reserved. Made in India.
+            © 2025 DHIRA Software Labs Pvt. Ltd. All rights reserved. Privacy Policy · Terms of Use
           </span>
           <div className="flex gap-6">
-            <a href="#talk-to-us" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#talk-to-us" className="hover:text-primary transition-colors">Terms of Service</a>
+            <span>Startup India badge</span>
+            <span>MSME badge</span>
           </div>
         </div>
       </footer>
@@ -1207,6 +1252,17 @@ export default function Home() {
         >
           <span className="w-2 h-2 rounded-full bg-amber-500"></span>
           Page 3 (Dark Theme)
+        </button>
+        <button 
+          onClick={() => setTheme("light-orange")} 
+          className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
+            theme === "light-orange" 
+              ? "bg-primary text-primary-foreground shadow-lg font-black" 
+              : "border border-border bg-secondary hover:bg-secondary/70 text-foreground"
+          }`}
+        >
+          <span className="w-2 h-2 rounded-full bg-orange-600"></span>
+          Page 4 (Light Orange)
         </button>
       </div>
 
