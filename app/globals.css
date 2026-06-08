@@ -2,32 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+:root, .theme-dark {
+  --background: #0b0b0d;
+  --foreground: #f3f4f6;
+  --primary: #f59e0b; /* Amber/Gold */
+  --primary-hover: #d97706;
+  --primary-foreground: #0b0b0d;
+  --secondary: #1a1a1f;
+  --secondary-hover: #28282f;
+  --secondary-foreground: #f3f4f6;
+  --accent: #f97316; /* Orange/Copper accent */
+  --accent-foreground: #ffffff;
+  --border: #212127;
+  --card-bg: rgba(18, 18, 23, 0.7);
+  --card-border: rgba(60, 60, 70, 0.45);
+  --muted: #6b7280;
+  --muted-foreground: #a1a1aa;
+  --success: #10b981;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.theme-light-emerald {
+  --background: #fafafa;
+  --foreground: #111827;
+  --primary: #047857; /* Emerald Green */
+  --primary-hover: #065f46;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --secondary-hover: #e5e7eb;
+  --secondary-foreground: #111827;
+  --accent: #b45309; /* Deep Amber/Bronze */
+  --accent-foreground: #ffffff;
+  --border: #e5e7eb;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(209, 213, 219, 0.6);
+  --muted: #6b7280;
+  --muted-foreground: #4b5563;
+  --success: #10b981;
+}
+
+.theme-light-violet {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #6d28d9; /* Royal Violet */
+  --primary-hover: #5b21b6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-hover: #e2e8f0;
+  --secondary-foreground: #0f172a;
+  --accent: #c2410c; /* Deep Copper */
+  --accent-foreground: #ffffff;
+  --border: #e2e8f0;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(226, 232, 240, 0.75);
+  --muted: #64748b;
+  --muted-foreground: #475569;
+  --success: #10b981;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--foreground);
+  background-color: var(--background);
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Glassmorphism utility */
+.glass-effect {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
 }
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
