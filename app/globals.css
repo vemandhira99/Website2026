@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root, .theme-dark {
-  --background: #0b0b0d;
-  --foreground: #f3f4f6;
-  --primary: #f59e0b; /* Amber/Gold */
-  --primary-hover: #d97706;
-  --primary-foreground: #0b0b0d;
-  --secondary: #1a1a1f;
-  --secondary-hover: #28282f;
-  --secondary-foreground: #f3f4f6;
-  --accent: #f97316; /* Orange/Copper accent */
-  --accent-foreground: #ffffff;
-  --border: #212127;
-  --card-bg: rgba(18, 18, 23, 0.7);
-  --card-border: rgba(60, 60, 70, 0.45);
-  --muted: #6b7280;
+  --background: #09090b; /* Pitch black / Zinc 950 */
+  --foreground: #fafafa; /* Clean off-white */
+  --primary: #ffffff;    /* Pure white primary accents */
+  --primary-hover: #e4e4e7; /* Light gray */
+  --primary-foreground: #09090b; /* Black text on white */
+  --secondary: #18181b;  /* Zinc 900 card backgrounds */
+  --secondary-hover: #27272a;
+  --secondary-foreground: #fafafa;
+  --accent: #a1a1aa;     /* Medium-light gray */
+  --accent-foreground: #09090b;
+  --border: #27272a;     /* Zinc 800 borders */
+  --card-bg: rgba(24, 24, 27, 0.7);
+  --card-border: rgba(63, 63, 70, 0.45);
+  --muted: #71717a;
   --muted-foreground: #a1a1aa;
   --success: #10b981;
 }

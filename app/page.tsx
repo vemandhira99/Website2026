@@ -1266,7 +1266,7 @@ export default function Home() {
               : "border border-border bg-secondary hover:bg-secondary/70 text-foreground"
           }`}
         >
-          <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span className="w-2 h-2 rounded-full bg-zinc-400"></span>
           Page 3 (Dark Theme)
         </button>
         <button 
