@@ -383,7 +383,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="font-outfit font-black tracking-tight text-5xl md:text-7xl lg:text-8xl text-foreground leading-[0.95] max-w-4xl"
           >
-            From Data. <br />
+            From <span className="text-shimmer">Data.</span> <br />
             To Decisions. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">At Scale.</span>
           </motion.h1>
