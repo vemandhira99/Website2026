@@ -60,8 +60,8 @@ export default function BackgroundGrid() {
       }
     }
 
-    // Initialize particles
-    const particleCount = Math.min(Math.floor((width * height) / 15000), 100)
+    // Initialize particles (disabled for minimalist light-slate theme)
+    const particleCount = theme === "light-slate" ? 0 : Math.min(Math.floor((width * height) / 15000), 100)
     const particles: Particle[] = []
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
@@ -70,30 +70,35 @@ export default function BackgroundGrid() {
     // Set colors based on theme
     const getColors = () => {
       switch (theme) {
-        case "light-emerald":
+        case "dark-midnight":
           return {
-            particle: "rgba(4, 120, 87, 0.25)", // Emerald green
-            line: "rgba(4, 120, 87, 0.08)",
-            grid: "rgba(4, 120, 87, 0.03)",
+            particle: "rgba(59, 130, 246, 0.28)", // Blue particles
+            line: "rgba(59, 130, 246, 0.08)",
+            grid: "rgba(59, 130, 246, 0.025)",
           }
-        case "light-violet":
+        case "light-cobalt":
           return {
-            particle: "rgba(109, 40, 217, 0.22)", // Violet
-            line: "rgba(109, 40, 217, 0.06)",
-            grid: "rgba(109, 40, 217, 0.02)",
+            particle: "rgba(92, 91, 245, 0.15)", // Lapis Periwinkle
+            line: "rgba(92, 91, 245, 0.04)",
+            grid: "rgba(92, 91, 245, 0.015)",
           }
-        case "light-orange":
+        case "light-cyan":
           return {
-            particle: "rgba(234, 88, 12, 0.24)", // Orange
-            line: "rgba(234, 88, 12, 0.08)",
-            grid: "rgba(234, 88, 12, 0.03)",
+            particle: "rgba(30, 96, 145, 0.15)", // Aegean Steel Blue
+            line: "rgba(30, 96, 145, 0.04)",
+            grid: "rgba(30, 96, 145, 0.015)",
           }
-        case "dark":
+        case "light-slate":
+          return {
+            particle: "rgba(63, 55, 201, 0.12)", // Royal Ultramarine
+            line: "rgba(63, 55, 201, 0.03)",
+            grid: "rgba(63, 55, 201, 0.01)",
+          }
         default:
           return {
-            particle: "rgba(245, 158, 11, 0.28)", // Amber/Gold
-            line: "rgba(245, 158, 11, 0.08)",
-            grid: "rgba(245, 158, 11, 0.03)",
+            particle: "rgba(59, 130, 246, 0.2)", 
+            line: "rgba(59, 130, 246, 0.05)",
+            grid: "rgba(59, 130, 246, 0.02)",
           }
       }
     }

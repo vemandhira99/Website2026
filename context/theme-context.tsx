@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react"
 
-export type ThemeType = "dark" | "light-emerald" | "light-violet" | "light-orange"
+export type ThemeType = "dark-midnight" | "light-cobalt" | "light-cyan" | "light-slate"
 
 interface ThemeContextType {
   theme: ThemeType
@@ -12,7 +12,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeType>("light-orange")
+  const [theme, setThemeState] = useState<ThemeType>("dark-midnight")
 
   const setTheme = (newTheme: ThemeType) => {
     setThemeState(newTheme)
@@ -21,20 +21,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const root = window.document.documentElement
     // Remove all theme classes
-    root.classList.remove("theme-dark", "theme-light-emerald", "theme-light-violet", "theme-light-orange")
+    root.classList.remove(
+      "theme-dark-midnight",
+      "theme-light-cobalt",
+      "theme-light-cyan",
+      "theme-light-slate"
+    )
     
     // Add active theme class
-    if (theme === "dark") {
-      root.classList.add("theme-dark")
+    root.classList.add(`theme-${theme}`)
+    
+    if (theme === "dark-midnight") {
       root.style.colorScheme = "dark"
-    } else if (theme === "light-emerald") {
-      root.classList.add("theme-light-emerald")
-      root.style.colorScheme = "light"
-    } else if (theme === "light-violet") {
-      root.classList.add("theme-light-violet")
-      root.style.colorScheme = "light"
-    } else if (theme === "light-orange") {
-      root.classList.add("theme-light-orange")
+    } else {
       root.style.colorScheme = "light"
     }
   }, [theme])
