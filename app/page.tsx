@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 import { useTheme, ThemeType } from "../context/theme-context"
 import BackgroundGrid from "../components/BackgroundGrid"
 import { 
@@ -1247,9 +1248,11 @@ export default function Home() {
 
             <div className="relative w-full">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border/30">
-                <img 
+                <Image 
                   src="/dhira_dashboard.png" 
                   alt="Akashic Platform Dashboard — Real-Time Data Intelligence" 
+                  width={1200}
+                  height={800}
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent pointer-events-none" />
@@ -2654,7 +2657,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-8 mt-12 text-left">
               <div className="p-6 md:p-8 rounded-xl border border-border/30 bg-background/50 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-outfit font-bold text-lg text-foreground uppercase tracking-wide font-mono text-primary">// 🏛️ FOR GOVERNMENT</h3>
+                  <h3 className="font-outfit font-bold text-lg text-foreground uppercase tracking-wide font-mono text-primary">{"// 🏛️ FOR GOVERNMENT"}</h3>
                   <p className="text-xs text-muted-foreground mt-2 leading-relaxed font-medium">
                     Request a Ministry Briefing. Schedule a dedicated session for your Ministry or department. We cover platform capabilities, DPI track record, and deployment options.
                   </p>
@@ -2668,7 +2671,7 @@ export default function Home() {
 
               <div className="p-6 md:p-8 rounded-xl border border-border/30 bg-background/50 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-outfit font-bold text-lg text-foreground uppercase tracking-wide font-mono text-primary">// 🏢 FOR ENTERPRISE</h3>
+                  <h3 className="font-outfit font-bold text-lg text-foreground uppercase tracking-wide font-mono text-primary">{"// 🏢 FOR ENTERPRISE"}</h3>
                   <p className="text-xs text-muted-foreground mt-2 leading-relaxed font-medium">
                     Schedule a Demo or 6-Week Pilot. See Akashic working on your actual data. We offer a structured 6-week pilot with defined outcomes — so you evaluate on real results.
                   </p>
